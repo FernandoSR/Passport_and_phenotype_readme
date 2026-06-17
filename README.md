@@ -90,7 +90,7 @@ You should be able to see the folders `annotations`, `apache`, `blast_dbs`, `db_
 
 At this moment all the features of easy_gdb should be already available. In a web browser (Chrome, Firefox, etc.) go to: `localhost:8000/easy_gdb/`. You should be able to see an example of EasyGDB running.
 
-![easy GDB home](:/easy_gdb_home.png)
+![easy GDB home](/_resources/easy_gdb_home.png)
 
 
 # Installation without Docker (only for Linux Systems)
@@ -1241,10 +1241,13 @@ This section defines the visual styling of the tools.
 
 <h4>Collapsible components:</h4>
 - Featured Traits & Gallery:<br>
+
   ![Featured_traits_collapse.png](/_resources/Featured_traits_collapse.png)
 -  phenotypic trait sections:<br>
+
   ![Phenotypic_traits_collapse.png](/_resources/Phenotypic_traits_collapse.png)
 -  categorical information icons:<br>
+
   ![info_icon.png](/_resources/info_icon.png)
 
 >[!IMPORTANT]
@@ -1348,7 +1351,7 @@ The `custom_tools_icons.json` file supports the following parameters:
 To add a new icon, add a keyword and its corresponding FontAwesome 5 class. Keywords are matched case-insensitively against names, so a keyword `"weight"` will match any trait whose name contains the word "weight".
 
 If the user do not wants icons in your installation, can either delete the `custom_tools_icons.json` file or remove the individual parameters you do not need. The tool will fall back to the default icons or hide icon elements gracefully.
-<br>
+<br><br>
 
 
 ## Gene variation tools

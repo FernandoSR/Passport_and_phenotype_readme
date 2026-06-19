@@ -9,7 +9,6 @@ Welcome to EasyGDB. It is a system designed to simplify the implementation of ge
 For more information check [this YouTube playlist](https://youtu.be/JTE-8zR5ogk).
 
 
-
 Some examples of sites developed using EasyGDB are:
 
 -   [MangoBase](https://mangobase.org/)
@@ -392,7 +391,7 @@ This tool allows us to visualize and download all available annotations for a li
 
 As we ran the setup file after cloning easy GDB, at this point, an example of JBrowse should be ready (If you chose to install JBrowse). You should be able to check it following the `Tools/Genome Browser` link in the menu bar, or at <http://localhost:8000/jbrowse/>.
 
-For more information about how to add a new species and to add tracks see `Install and set up JBrowse` [below](#customize-jbrowse).
+For more information about how to add a new species and to add tracks see `Install and set up JBrowse` [below](#jbrowse).
 
 ### BLAST
 
@@ -765,7 +764,7 @@ This module provides management of passport and phenotypic data and integrates t
 
 - ***Map navigation*** : lists available species and plots accessions on a world map using coordinates or country/country code. It helps users quickly visualize the geographic distribution of collections and explore species by location.
 
-- ***Passport and phenotype search*** : search accessions by passport fields or phenotype traits, so users can quickly find specific samples and compare their registration and trait data
+- ***Passport and phenotype search*** : search accessions by passport fields or phenotype traits, so users can quickly find specific samples.
 
 - ***Phenotype extraction*** : extract phenotypic data and download it as a CSV file for use in association analyses such as GWAS. The tool shares its input files with the tools described earlier.
 
@@ -822,11 +821,11 @@ The passport data folder should be organized as shown below:
   | ACC_name | Country | Country code | Latitude | Longitude | ... |
   | --- | --- | --- | --- | --- | --- |
   | Hass |  | USA |  |  |
-  | Picual | Spain |  | 36.735 | -3.68972 |
-   | Yummy | China |  |  |  |
+  | Picual | Spain | ESP | 36.735 | -3.68972 |
+   | Yummy | China | CHN |  |  |
   
 > [!IMPORTANT]
-> ***Latitude and Longitude***,  or ***Country***  or ***Country code***, are required to position the markers on the maps, and they must be written exactly as shown in the example table. *Providing any one of these options is sufficient*.
+> ***Latitude and Longitude***,  or ***Country***  or ***Country code*** ( [Alpha3-code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) ), are required to position the markers on the maps, and they must be written exactly as shown in the example table. *Providing any one of these options is sufficient*.
 
 <br>
 
@@ -845,8 +844,8 @@ The passport data folder should be organized as shown below:
 
 ### <i>2.3 germplasm_list.json file:</i>
 
-  If there is more than one species organized into different subdirectories (Species_1, Species_2, …),, the tool will display those subdirectories in a menu and show their geographic distribution on a map. 
-  The structure and configuration of these subdirectories are defined in the *germplam_list.json* file, as show below:
+If there is more than one species organized into different subdirectories (Species_1, Species_2, …), and you want to display those subdirectories in a menu, you must include this file.  
+The structure and configuration of these subdirectories are defined in the *germplam_list.json* file, as show below:
 
   ```JSON
   {
@@ -855,10 +854,16 @@ The passport data folder should be organized as shown below:
       "common_name":"Cherimoya",
       "image":"sp1.png",
       "public":"1"
+    },
+  "mango":
+    {"sps_name":"Mangifera indica",
+      "common_name":"Mango",
+      "image":"mango.png",
+      "public":"1"
     }
   }
   ```
-  `sps_name`:The scientific name of the species.<br>
+  `sps_name`: The scientific name of the species.<br>
   `common_name`: The common name of the species.<br> 
   `image`: Representative image of the species (stored in *egdb_images/species/*, e.g., egdb_images/species/sp1.png).<br>
   `public`: Indicates whether the species is public or private.
@@ -899,11 +904,11 @@ The passport data folder should be organized as shown below:
       }
   }
   ```
-<p style= font-size:17px><b>Basic fields:</b></p>
+<p style= font-size:17px><b><i>Basic fields:</i></b></p>
 
-`passport_file`: name of the passport data file (e.g., sp_passport.txt). Must be a single file.<span style="color:yellow">(mandatory)</span>
+`passport_file`: name of the passport data file (e.g., sp_passport.txt). Must be a single file. $\color{yellow}{(madatory)}$
 
-`acc_link`: defines which column (name) of the passport data file will be the unique identifier to use as link to access the information (usually the accession name or similar identifier).<span style="color:yellow">(mandatory)</span>
+`acc_link`: defines which column (name) of the passport data file will be the unique identifier to use as link to access the information (usually the accession name or similar identifier). $\color{yellow}{(mandatory)}$
 
 > [!IMPORTANT]
     The data in the column selected cannot contain accents or special characters.
@@ -913,30 +918,30 @@ The passport data folder should be organized as shown below:
 >[!NOTE]
   The file name determines the section name displayed in the output.
 
-`sp_name` species name than determines configuration of the [map markers](#map-markers-icons) name and the [gallery](#Gallery) folder.
+`sp_name` species name than determines configuration of the [map markers](#map-markers-icons) name and the [gallery](#Gallery) folder. $\color{yellow}{(mandatory)}$
 
 >[!NOTE]
-If this variable is empty or not defined in the configuration, it will affect the configuration of the map markers, the gallery, and various sections of the tool..
+If this variable is empty or not defined in the configuration, it will affect the configuration of the map markers, the gallery, and various sections of the tool.
 
-  <br><p style= font-size:17px><b>Avanced fields:</b></p>
+<br><p style= font-size:17px><b><i>Avanced fields:</i></b></p>
 
-`phenotype_imgs`:JSON file associating each trait with the corresponding picture.[[Configuration]](#phenotype_imgs-json-file-configuration)
+`phenotype_imgs`:JSON file associating each trait with the corresponding picture. [[Configuration]](#phenotype_imgs-json-file-configuration)
 
 `img_src_msg `: text string used to reference the image source in the output.
 
 >[!NOTE]
    This text will appear at the bottom of the page.
 
-`convert_to_cathegoric` JSON file than convert numeric scale trait values to categorical classes within defined ranges. For example, fruit size values between 0–2 cm may be classified as “small”.[[Configuration]](#convert_to_cathegoric-json-file-configuration)
+`convert_to_cathegoric` JSON file than convert numeric scale trait values to categorical classes within defined ranges. For example, fruit size values between 0–2 cm may be classified as “small”. [[Configuration]](#convert_to_cathegoric-json-file-configuration)
 
  > [!NOTE] 
   *Non‑numeric* (categorical) phenotypic traits are not configured in this file.
 
-`translator` JSON  file to add additional languages to phenotypes names.[[Configuration]](#translator-json-file-configuration)
+`translator` JSON  file to add additional languages to phenotypes names. [[Configuration]](#translator-json-file-configuration)
 
-`featured_descriptors`: file to highlight a set of important traits.[[Configuration]](#featured_descriptors-json-file-configuration)
+`featured_descriptors`: file to highlight a set of important traits. [[Configuration]](#featured_descriptors-json-file-configuration)
 
-`phenotype_file_marker_trait` and `marker_column`: name of the dataset and index column from which the phenotypic traits used for map markers.[[Configuration]](#map-markers) 
+`phenotype_file_marker_trait` and `marker_column`: name of the dataset and index column from which the phenotypic traits used for map markers. [[Configuration]](#map-markers) 
 
 > [!NOTE]
     If the species does not have multiple phenotypic traits, this parameter is not required.<br>
@@ -953,8 +958,9 @@ If this variable is empty or not defined in the configuration, it will affect th
 
 > [!NOTE]
 > The system uses natural numbers, the first column is column 1, not column 0.
----
+<br>
 
+---
 ### <h3 id="map-markers-icons">`map markers`</h3>
 Map markers are the icons used to show each accession on the map. The tool can use a different marker image depending the phenotype trait value. Each marker image (icon) filename is constructed as: `sp_name` + _ + `traitValue`.png. 
 
@@ -1045,7 +1051,9 @@ For example:
 
 
 Section of the accession information page:<br>
-![Featured_traits .png](/_resources/Featured_traits.png)
+![Featured_traits .png](/_resources/featured_traits_gallery.png)
+
+<br>
 
 ### `translator` (json file configuration)
 Translates and adds additional languages to the specified phenotype trait.<br>
@@ -1235,12 +1243,15 @@ $egdb_images/
                   |---- image2.png
 ```
 
+![Gallery.png](/_resources/gallery.png)
+
 <h3 id="custom"> 4. Customization Passport and Phenotype tools</h3>
 
 This section defines the visual styling of the tools.
 
 <h4>Collapsible components:</h4>
-- Featured Traits & Gallery:<br>
+
+  - Featured Traits & Gallery:<br>
 
   ![Featured_traits_collapse.png](/_resources/Featured_traits_collapse.png)
 -  phenotypic trait sections:<br>

@@ -815,6 +815,9 @@ The passport data folder should be organized as shown below:
 > [!IMPORTANT]
 >These files must be tab‑delimited text and may contain as many columns as required.
 
+> [!NOTE]
+> [Here](https://github.com/noefp/easyGDB_docker/tree/main/src/passport/example) you can find  example files that illustrate the structure and configuration required for the tool to function properly.
+
 ### <i>2.1 passport_data.txt file:</i>
   This file contains all the necessary data related to the passport (geographical location, species, and any type of information that is not phenotypic).
 
@@ -913,31 +916,31 @@ The structure and configuration of these subdirectories are defined in the *germ
 > [!IMPORTANT]
     The data in the column selected cannot contain accents or special characters.
 
-`phenotype_files` List the phenotype data files.
+`phenotype_files`: list the phenotype data files.
 
 >[!NOTE]
   The file name determines the section name displayed in the output.
 
-`sp_name` species name than determines configuration of the [map markers](#map-markers-icons) name and the [gallery](#Gallery) folder. $\color{yellow}{(mandatory)}$
+`sp_name`: species name than determines configuration of the [map markers](#map-markers-icons) name and the [gallery](#Gallery) folder. $\color{yellow}{(mandatory)}$
 
 >[!NOTE]
 If this variable is empty or not defined in the configuration, it will affect the configuration of the map markers, the gallery, and various sections of the tool.
 
 <br><p style= font-size:17px><b><i>Avanced fields:</i></b></p>
 
-`phenotype_imgs`:JSON file associating each trait with the corresponding picture. [[Configuration]](#phenotype_imgs-json-file-configuration)
+`phenotype_imgs`: JSON file associating each trait with the corresponding picture. [[Configuration]](#phenotype_imgs-json-file-configuration)
 
 `img_src_msg `: text string used to reference the image source in the output.
 
 >[!NOTE]
    This text will appear at the bottom of the page.
 
-`convert_to_cathegoric` JSON file than convert numeric scale trait values to categorical classes within defined ranges. For example, fruit size values between 0–2 cm may be classified as “small”. [[Configuration]](#convert_to_cathegoric-json-file-configuration)
+`convert_to_cathegoric`: JSON file than convert numeric scale trait values to categorical classes within defined ranges. For example, fruit size values between 0–2 cm may be classified as “small”. [[Configuration]](#convert_to_cathegoric-json-file-configuration)
 
  > [!NOTE] 
   *Non‑numeric* (categorical) phenotypic traits are not configured in this file.
 
-`translator` JSON  file to add additional languages to phenotypes names. [[Configuration]](#translator-json-file-configuration)
+`translator`: JSON  file to add additional languages to phenotypes names. [[Configuration]](#translator-json-file-configuration)
 
 `featured_descriptors`: file to highlight a set of important traits. [[Configuration]](#featured_descriptors-json-file-configuration)
 
@@ -947,14 +950,14 @@ If this variable is empty or not defined in the configuration, it will affect th
     If the species does not have multiple phenotypic traits, this parameter is not required.<br>
     If only a single image is used for all accessions, this parameter should be left empty.
 
-`numerics_columns_without_average`: Specifying which numeric phenotype traits should not be averaged.<br>Each dataset configuration file must explicitly define the columns that are excluded.
+`numerics_columns_without_average`: specifying which numeric phenotype traits should not be averaged.<br>Each dataset configuration file must explicitly define the columns that are excluded.
 
 > [!NOTE]
   Be sure to specify in this section any columns with dates or numeric information that cannot be used to calculate averages.<br>
   >The system uses natural numbers, the first column is column 1, not column 0 ( 1 = first column ).
   <br>
 
-`hidden_search_traits`: To control which phenotype traits are available for selection in the Advanced Search interface and in phenotype extraction tool , each dataset configuration file must explicitly define the columns that should not appear as selectable options.
+`hidden_search_traits`: to control which phenotype traits are available for selection in the Advanced Search interface and in phenotype extraction tool , each dataset configuration file must explicitly define the columns that should not appear as selectable options.
 
 > [!NOTE]
 > The system uses natural numbers, the first column is column 1, not column 0.
@@ -1235,10 +1238,10 @@ Inside that directory, create subdirectories named after each variety of the spe
 $egdb_images/
 |---- gallery/
       |---- Species_1/
-            |---- Variety1/
+            |---- ACC1/
                   |---- image1.png
                   |---- image2.png
-            |---- Variety2/
+            |---- ACC2/
                   |---- image1.png
                   |---- image2.png
 ```

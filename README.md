@@ -769,7 +769,7 @@ This module provides management of passport and phenotypic data and integrates t
 - ***Phenotype extraction*** : extract phenotypic data and download it as a CSV file for use in association analyses such as GWAS. The tool shares its input files with the tools described earlier.
 
 ### <h3 id="easyGDB_conf"> 1. Required configuration in easyGDB_conf.php </h3>
-To enable this module, it is necessary to activate the next options in `easyGDB_conf.php` :
+To enable this module, it is necessary to activate the next options in [easyGDB_conf.php](https://github.com/noefp/easyGDB_docker/blob/main/src/egdb_files/egdb_conf/easyGDB_conf.php) :
 
 - `tb_passport` = 1 enable the *Passport and Phenotype*  dropdown in the toolbar.
   - `tb_navigation` = 1 enable *Map Navigation* link in the toolbar.

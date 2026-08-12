@@ -36,7 +36,7 @@ Some examples of sites developed using EasyGDB are:
         - [Toolbar](#toolbar)
         - [Home page](#home-page)
         - [More custom pages](#more-custom-pages)
-    -   [Resources](#resources)
+    -   [Other resources](#other-resources)
         - [About us](#about-us)
         - [Species](#species)
         - [Downloads](#downloads)
@@ -317,7 +317,7 @@ The file `table_to_page.php` is a template to format the file passed in the URL 
 
 The variable `link_field` passed in the URL defines which column contains an unique id that can be used to link to the page `row_data.php`, which is a template to show the data contained in the row of the table where the linked id belongs to. In the example, as ´ACC Name (contains a space in the URL that is written as `ACC%20Name`).
 
-## Resources
+## Other Resources
 ### About Us
 
 If the variable `$tb_about` is equal to `1` in the configuration file (`easyGDB_conf.php`), then you should be able to see the example text for the `About Us` section.
@@ -691,7 +691,9 @@ To disable any specific expression tool, set its corresponding variable to 0 ins
 ## Expression viewer
 ## Configuration
 ### Required files and folder
-The expression datasets should be placed in the `expression_data` folder (by default defined as `$expression_path` = `$root_path/expression_data` in [`easyGDB_conf.php`](https://github.com/noefp/easyGDB_docker/blob/main/src/egdb_files/egdb_conf/easyGDB_conf.php)). Additionally, the `$json_file_path/tools/expression_info.json` file will allow you to customize the gene expression atlas.
+The expression datasets should be placed in the `expression_data` folder (by default defined as `$expression_path` = `$root_path/expression_data` in [`easyGDB_conf.php`](https://github.com/noefp/easyGDB_docker/blob/main/src/egdb_files/egdb_conf/easyGDB_conf.php)). 
+
+Additionally, the `egdb_files/json_files/tools/expression_info.json` file will allow you to customize the gene expression atlas.
 
 Inside the `expression_data` directory it is possible to organize the expression datasets in subfolders to separate them by technology (RNA-seq, microarray, proteomics, metabolomics, etc.) or by species.
 
@@ -726,15 +728,16 @@ Also, just by placing the expression files in the `expression_data` directory wi
 ### expression_info.json
 
 The JSON file `egdb_files/json_files/tools/expression_info.json` includes:
-- `link` - links to the gene annotation page for each dataset (it is also possible to add external links or remove links) in the *Average values* table.  By default this field should remain empty (`"link":""`). Using  `"link":"#"` field will remove links. To use an external link we just need to add the URL include the word `query_id` in the place of the gene identifier. For example, for UniProt the link would be `http://www.uniprot.org/uniprot/query_id` and the gene IDs in the expression matrix should correspond to UniProt identifiers.
+
+- <span id="link">`link` </span> - links to the gene annotation page for each dataset (it is also possible to add external links or remove links) in the *Average values* table.  By default this field should remain empty (`"link":""`). Using  `"link":"#"` field will remove links. To use an external link we just need to add the URL include the word `query_id` in the place of the gene identifier. For example, for UniProt the link would be `http://www.uniprot.org/uniprot/query_id` and the gene IDs in the expression matrix should correspond to UniProt identifiers.
 
 - `annotation_file` - field it is possible to provide an annotation file to add gene annotations in the *Average values* table and links to the gene annotations pages.
 
--  `description` - field than add a dataset description. It will include the indicated PHP file, which should be placed in `egdb_custom_text/expr_datasets/` within the `egdb_files` folder. It is recommendable to describe briefly the experimental conditions and links to its publication. 
+-  `description` - field than add a dataset description. It will include the indicated PHP file, which should be placed in `egdb_custom_text/expr_datasets/` within the your `egdb_files` folder. It is recommendable to describe briefly the experimental conditions and links to its publication. 
 The descriptions of all datasets will be shown in the *Expression tools*, which can be enabled using the variable `$expr_menu` in the configuration file (*easyGDB_conf.php*).
 
 
-- `images` - In case of enabling the expression card visualization, it is important to add the file names of the images used for each sample. In that case, you can add image files in the images path (`egdb_images/expr/`) and add the names of the sample with their corresponding image. 
+- `images` - In case of enabling the expression card visualization, it is important to add the file names of the images used for each sample. In that case, you can add image files in the images path (`egdb_images/expr/` in your `egdb_files` folder) and add the names of the sample with their corresponding image. 
   >[!IMPORTANT] 
   The sample name in the JSON is identical to the sample name in the header of the tab-delimited expression data file, and the image file name corresponds with the name in the images path. The expression cards could be useful to show real photos of the sample phenotype together with its expression data.
 
@@ -783,7 +786,7 @@ The descriptions of all datasets will be shown in the *Expression tools*, which 
 <br>
 
 ### Cartoons
-For the configuration of cartoons we should provide a separated JSON file (`egdb_files/json_files/tools/cartoons_example1.json`). It is possible to add as many cartoon JSON files as datasets are with cartoons.
+For the configuration of cartoons we should provide a separated JSON file (`json_files/tools/cartoons_example1.json` in your `egdb_files` folder). It is possible to add as many cartoon JSON files as datasets are with cartoons.
 
 If expression cartoons are enabled we should provide a JSON file to set up each cartoon image, the samples associated with them, and their dimensions and coordinates.
 Cartoon images should be placed at `egdb_images/expr/cartoons/` inside your `egdb_files` folder, which usually correspond to your project customization folder and it could have been renamed before (see [Customize file paths](#customize-file-paths)).
@@ -851,7 +854,7 @@ $ranges=[[0,0.99],[1,1.99],[2,4.99],[5,9.99],[10,49.99],[50,99.99],[100,199.99],
 
 `ranges`:  array that contains the lower and upper limits of each range are defined. [low,up].
 
-If you want to create a specific color palette for each dataset, you can configure it in the `expression_info.json` file located in the `/json_files/tools` folder and there put the variables shown above in the section of each dataset with the keyword "expression_colors" like this.
+If you want to create a specific color palette for each dataset, you can configure it in the `expression_info.json` file located in the `egdb_files/json_files/tools` folder and there put the variables shown above in the section of each dataset with the keyword "expression_colors" like this.
 
 ``` JSON
 {
@@ -891,10 +894,23 @@ El apartado [configuration de expression tools](#configuration) muestra todo el 
 ## Expression comparator
 Its main configuration is the same as in the [Expression Viewer](#expression-viewer), but this tool also includes specific functionalities that are configured independently:
 
-  -  `comparator_link.json` file in `egdb_files/json_files/tools/`.
-  - `comparator_lookup.json` file
+- `comparator_link.json` - 
+File located in `egdb_files/json_files/tools/`. It works the same way as the [link](#link) configuration used in the **Expression Viewer**, but this file defines the link to the gene annotation page for all genes in the selected datasets.
 
-  - A `comparator_gene_list.txt` file may be added to provide a gene list to the tool’s input section and an autocompletation gene search. *(Optional)*
+  ``` json
+  "link":"#"
+  ```
+
+- `comparator_lookup.json` file located in `egdb_files/json_files/tools/`- List of gene identifiers to the equivalent list of genes in a different annotation version, or equivalent orthologs in other species. 
+
+  ``` json
+    "gene1.1":"new_gene1.1",
+    "gene2.1":"new_gene2.1",
+    "gene3.1":"new_gene3.1",
+    "gene4.1":"new_gene4.1",
+  ```
+
+- A `comparator_gene_list.txt` file may be added to provide a gene list to the tool’s input section and an autocompletation gene search. *(Optional)*
 
     ```txt
         expression_data/
@@ -919,7 +935,7 @@ The configuration of the *Coefficient of Variation Calculator* is defined in the
 
 ## Co-expression search
 
-Correlation data should be placed in the `$coexpression_path`, in `$root_path/coexpression_data` by default (defined as `$coexpression_path = "$root_path/coexpression_data"` in *egdb_conf/easyGDB_conf.php*)
+Correlation data should be placed in the `$coexpression_path`, in `$root_path/coexpression_data` by default (defined as `$coexpression_path = "$root_path/coexpression_data"` in *easyGDB_conf.php*)
 
 >[!IMPORTANT]
 These files should be tab-delimited text files.
@@ -958,7 +974,7 @@ Gene7   NA     1       0.938
 Gene9   NA     NA      1
 ```
 
-These two elements must be added to the same new folder with a name of your choice inside the coexpression folder `(coexpression_path)`.
+These two elements must be added to the same new folder with a name of your choice inside the your coexpression folder `(coexpression)`.
 
 ```
 correlation/
@@ -1007,11 +1023,11 @@ Set each variable to `1` or `0` to enable or disable the corresponding tool in `
 
 Paths required:
 
-- `$images_path` = path where the images used by the tool will be stored ( *"/$egdb_files_folder/egdb_images"*).
+- `$images_path` = path where the images used by the tool will be stored (by default `/egdb_files/egdb_images`).
 
-- `$passport_path` = path where the passport and phenotype files will be stored (*"$root_path/passport"*).
+- `$passport_path` = path where the passport and phenotype files will be stored (by  default `/passport`).
 
-- `$custom_css_path`= path to css file (*"$egdb_files_folder/css/file_name.css"* ). Only if you want to customize the visual styling of the tool’s.
+- `$custom_css_path`= path to css file (`$egdb_files/css/file_name.css`). Only if you want to customize the visual styling of the tool’s.
 
 <br>
 

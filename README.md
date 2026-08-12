@@ -1,4 +1,5 @@
-﻿# EasyGDB
+﻿<!-- # EasyGDB -->
+![easy_gdb_logo.png](/_resources/easy_gdb_logo.png)
 
 Welcome to ***EasyGDB***. It is a system designed to simplify the implementation of genomics portals and minimize their maintenance. EasyGDB genomics portals can include tools such as Expression atlas, BLAST, Genome browser (JBrowse), genetic variation explorer, file downloads, sequence extraction, annotation search, bulk annotation extraction, gene list lookup, and germplasm passport and phenotype tools.
 
@@ -711,6 +712,7 @@ Inside the `expression_data` directory it is possible to organize the expression
 ```
 
 Place your expression data files in the `expression_data` folder, as tab delimited text files with normalized data for each replicates in the columns (header), and each gene in the rows (first column), as shown in the example.
+
 > [!IMPORTANT]
 >The files must be tab‑delimited text.<br>
  All replicates should have the same name in the header to be grouped together (For example: leaf, leaf, leaf, root, root, root, heat, heat, heat, etc.).
@@ -739,7 +741,7 @@ The descriptions of all datasets will be shown in the *Expression tools*, which 
 
 - `images` - In case of enabling the expression card visualization, it is important to add the file names of the images used for each sample. In that case, you can add image files in the images path (`egdb_images/expr/` in your `egdb_files` folder) and add the names of the sample with their corresponding image. 
   >[!IMPORTANT] 
-  The sample name in the JSON is identical to the sample name in the header of the tab-delimited expression data file, and the image file name corresponds with the name in the images path. The expression cards could be useful to show real photos of the sample phenotype together with its expression data.
+  >The sample name in the JSON is identical to the sample name in the header of the tab-delimited expression data file, and the image file name corresponds with the name in the images path. The expression cards could be useful to show real photos of the sample phenotype together with its expression data.
 
 <br>
 
@@ -872,7 +874,9 @@ If you want to create a specific color palette for each dataset, you can configu
     }
 }
 ```
-In case of not adding these variables or any error defining them in the `easyGDB_conf` and/or in the `expression_info.json` , a default color palette will be loaded.
+
+>[!NOTE]
+>In case of not adding these variables or any error defining them in the `easyGDB_conf` and/or in the `expression_info.json` , a default color palette will be loaded.
 
 ### Customise the visualization methods
 To customize the visualization methods in the Expression results it is possible to edit the values of the variable `$positions` in the `easyGDB_conf.php` file. Set the value of any tool to 0 to disable it, and to 1 or any number greater than 1 to enable it and set the order in which they will appear in the graphical interface, starting for 1 on top of the output page and adding below the next visualization methods as the values increase.
@@ -938,7 +942,7 @@ The configuration of the *Coefficient of Variation Calculator* is defined in the
 Correlation data should be placed in the `$coexpression_path`, in `$root_path/coexpression_data` by default (defined as `$coexpression_path = "$root_path/coexpression_data"` in *easyGDB_conf.php*)
 
 >[!IMPORTANT]
-These files should be tab-delimited text files.
+>These files should be tab-delimited text files.
 
 This tool takes two mandatory elements: 
 
@@ -1012,14 +1016,14 @@ Each *Passport and phenotype tools* can be included or hidden in the toolbar.<br
 Set each variable to `1` or `0` to enable or disable the corresponding tool in `easyGDB_conf.php` (`egdb_files/egdb_conf/easyGDB_conf.php`):
  <!-- [easyGDB_conf.php](https://github.com/noefp/easyGDB_docker/blob/main/src/egdb_files/egdb_conf/easyGDB_conf.php) : -->
 
-- `tb_passport` - Enable the *Passport and Phenotype*  dropdown in the toolbar.
+- `tb_passport` - Enable the ***Passport and Phenotype***  dropdown in the toolbar.
   - `tb_navigation` - Includes the ***Map Navigation*** link in the toolbar.
   - `tb_search_passport` - Includes the ***Passport and phenotype search*** link in the toolbar.
   -  `$tb_phen_ex` - Includes the ***Phenotype extraction***  link in the toobar.
   
 - To enable the tool’s features, you must set the following variables:  
-  - `show_qr` -  Enable a *QR code* containing the URL with the information of the selected accession.
-  - `show_map` -  Enable the *map*  displaying the location of the selected accession.
+  - `show_qr` -  Enable a ***QR code*** containing the URL with the information of the selected accession.
+  - `show_map` -  Enable the ***map***  displaying the location of the selected accession.
 
 Paths required:
 
